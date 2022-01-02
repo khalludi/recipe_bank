@@ -17,7 +17,7 @@ class MyReorderableField<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      width: 300,
+      width: MediaQuery.of(context).size.width-100,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

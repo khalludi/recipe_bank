@@ -19,7 +19,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
   var _isSelected = false;
   final _formKey = GlobalKey<FormState>();
 
-  void redraw() {
+  void redraw(Recipe recipe) {
     setState(() {});
   }
 
@@ -140,7 +140,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return FormWidget(recipe: widget.recipe, formKey: _formKey, redraw: redraw);
+                        return FormWidget(recipe: widget.recipe, formKey: _formKey, onSubmit: redraw);
                       });
                   },
                   child: Text('Edit'),

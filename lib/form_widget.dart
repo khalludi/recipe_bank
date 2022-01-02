@@ -7,9 +7,9 @@ import 'custom_form_field/reorderable_ff.dart';
 class FormWidget extends StatefulWidget {
   final Recipe recipe;
   final GlobalKey<FormState> formKey;
-  final Function redraw;
+  final Function onSubmit;
 
-  const FormWidget({Key? key, required this.recipe, required this.formKey, required this.redraw}) : super(key: key);
+  const FormWidget({Key? key, required this.recipe, required this.formKey, required this.onSubmit}) : super(key: key);
 
   @override
   _FormWidgetState createState() => _FormWidgetState();
@@ -47,9 +47,14 @@ class _FormWidgetState extends State<FormWidget> {
                       child: Row(
                         children: [
                           Text("Name: "),
-                          Flexible(child: TextFormField(
-                            initialValue: widget.recipe.title,
-                          )),
+                          Flexible(
+                            child: TextFormField(
+                              initialValue: widget.recipe.title,
+                              onSaved: (String? value) {
+                                widget.recipe.title = value!;
+                              },
+                            )
+                          ),
                         ],
                       ),
                     ),
@@ -96,7 +101,7 @@ class _FormWidgetState extends State<FormWidget> {
                           if (widget.formKey.currentState!.validate()) {
                             widget.formKey.currentState!.save();
                             Navigator.of(context).pop();
-                            widget.redraw();
+                            widget.onSubmit(widget.recipe);
                           }
                         },
                       ),

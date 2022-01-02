@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_bank/data.dart';
+import 'package:recipe_bank/form_widget.dart';
 import 'package:recipe_bank/recipe.dart';
 import 'package:recipe_bank/recipeWidget.dart';
 
@@ -75,7 +76,28 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return FormWidget(
+                recipe: Recipe("", "", [], []),
+                formKey: GlobalKey(),
+                onSubmit: addRecipe,
+              );
+            }
+          );
+        },
+      ),
     );
+  }
+
+  void addRecipe(Recipe recipe) {
+    setState(() {
+      Recipe.add(recipe);
+    });
   }
 
   void deleteRecipe(int index) {

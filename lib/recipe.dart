@@ -87,6 +87,10 @@ class Recipe {
     )
   ];
 
+  static add(Recipe recipe) {
+    exampleRet.add(recipe);
+  }
+
   static fetchAll() {
     return exampleRet;
   }
